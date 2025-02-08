@@ -1,29 +1,22 @@
 class NumberContainers {
 public:
-    map<int,int>numberSystem;
-    NumberContainers() {
-    }
-    
+    unordered_map<int, priority_queue<int, vector<int>, greater<int>>> res;
+    unordered_map<int, int> index_val;
+
     void change(int index, int number) {
-        numberSystem[index]=number;
-    }
-    
-    int find(int number) {
-        for(auto it:this->numberSystem)
-        {
-            if(it.second==number)
-            {
-                return it.first;
-            }
+        if (index_val.count(index)) {
+            int prevNum = index_val[index];
+            if (prevNum == number) return;
+            res[prevNum].push(INT_MAX); 
         }
-        return -1;
-        
+        res[number].push(index);
+        index_val[index] = number;
+    }
+
+    int find(int number) {
+        while (!res[number].empty() && index_val[res[number].top()] != number) {
+            res[number].pop();
+        }
+        return res[number].empty() ? -1 : res[number].top();
     }
 };
-
-/**
- * Your NumberContainers object will be instantiated and called as such:
- * NumberContainers* obj = new NumberContainers();
- * obj->change(index,number);
- * int param_2 = obj->find(number);
- */
