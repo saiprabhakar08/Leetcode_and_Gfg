@@ -17,8 +17,6 @@ public:
                 temp.pop();
                 long long res=s1*2+s2;
                 temp.push(res);
-                // temp.push(res);
-                cout<<s1<<" "<<s2<<" "<<res<<endl;
                 count++;
             }
             else break;
