@@ -1,25 +1,28 @@
 class Solution {
 public:
     string sortSentence(string s) {
-        vector<string>A;
-        string z="";
-        for(int i=0;i<s.size();i++){
-            if(s[i]==' '){
-                A.push_back(z);
-                z="";
+        unordered_map<int,string>temp;
+        string temp1="";
+        for(auto it:s)
+        {
+            if(it==' ')
+            {
+                temp[temp1[temp1.size()-1]-'0']=temp1;
+                temp1="";
             }
-            z+=s[i];
-        }
-        A.push_back(z);
-        z="";
-        for(int i=1;i<=A.size();i++){
-            for(int j=0;j<A.size();j++){
-                if(A[j][A[j].size()-1]-'0'==i){
-                    A[j].erase(A[j][A[j].size()-1],1);
-                    z+=A[j]+" ";
-                }
+            else
+            {
+                temp1+=it;
             }
         }
-        return z;
+        temp[temp1[temp1.size()-1]-'0']=temp1;
+        string ans="";
+        for(int j=1;j<=temp.size();j++)
+        {
+            ans+=temp[j];
+            ans.pop_back();
+            if(j+1<=temp.size()) ans+=' ';
+        }
+        return ans;
     }
 };
