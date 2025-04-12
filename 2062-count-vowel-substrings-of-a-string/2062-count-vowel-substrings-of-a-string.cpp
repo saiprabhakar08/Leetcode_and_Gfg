@@ -14,11 +14,6 @@ public:
                 else break;
                 if(vcount.size()==5) ans++;
             }
-            // cout<<endl;
-            // for(auto it:vcount)
-            // {
-            //     cout<<it.first<<" "<<it.second<<" ";
-            // }
             vcount.clear();
         }
         return ans;
