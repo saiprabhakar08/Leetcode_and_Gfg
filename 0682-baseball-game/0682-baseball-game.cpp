@@ -1,51 +1,56 @@
 class Solution {
 public:
     int calPoints(vector<string>& operations) {
-        stack<int>scores;
-        for(auto it:operations)
+        stack<int>temp;
+        for(int i=0;i<operations.size();i++)
         {
-            if(it=="+")
+            if(operations[i]=="+")
             {
-                int temp1=scores.top();
-                scores.pop();
-                int temp2=scores.top();
-                scores.push(temp1);
-
-                temp2+=temp1;
-                scores.push(temp2);
+                if(temp.size()>1)
+                {
+                    int temp1=temp.top();
+                    temp.pop();
+                    int temp2=temp1+temp.top();
+                    temp.push(temp1);
+                    temp.push(temp2);
+                }
             }
-            else if(it=="D")
+            else if(operations[i]=="D")
             {
-                int temp1=scores.top();
-                // scores.pop();
-                scores.push(temp1+temp1);
+                if(temp.size()>0)
+                {
+                    int temp1=temp.top();
+                    temp1=temp1*2;
+                    temp.push(temp1);
+                }
             }
-            else if(it=="C")
+            else if(operations[i]=="C")
             {
-                scores.pop();
+                if(!(temp.empty())) temp.pop();
             }
             else
             {
-                int temp=0;
-                int flag=0;
-                for(int i=0;i<it.size();i++)
+                string temp1=operations[i];
+                int temp2=0,i=0;
+                if(temp1[i]=='-')
                 {
-                    // cout<<it[i]<<" ";
-                    if(it[i]=='-') flag=1;
-                    else temp=temp*10+(it[i]-'0');
+                    i++;
                 }
-                if(flag) temp=temp*-1;
-                // cout<<temp<<" "<<it<<endl;
-                scores.push(temp);
+                for(i;i<temp1.size();i++)
+                {
+                    temp2=temp2*10+(temp1[i]-'0');
+                }
+                if(temp1[0]=='-') temp2*=-1;
+                temp.push(temp2);
             }
         }
-        int res=0;
-        while(!(scores.empty()))
+        int ans=0;
+        while(!(temp.empty()))
         {
-            res+=scores.top();
-            scores.pop();
+            ans+=temp.top();
+            temp.pop();
         }
-        return res;
+        return ans;
         
     }
 };
