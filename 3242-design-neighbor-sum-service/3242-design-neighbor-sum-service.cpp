@@ -1,7 +1,7 @@
-class neighborSum {
+class NeighborSum {
 public:
     vector<vector<int>>grid;
-    neighborSum(vector<vector<int>>& grid) {
+    NeighborSum(vector<vector<int>>& grid) {
       this->grid=grid;  
     }
     
