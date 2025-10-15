@@ -14,9 +14,10 @@ public:
         string ans="";
         while(!(alp.empty()))
         {
-            ans=alp.top()+ans;
+            ans+=alp.top();
             alp.pop();
         }
+        reverse(ans.begin(),ans.end());
         return ans;
         
     }
