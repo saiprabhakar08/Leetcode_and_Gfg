@@ -1,35 +1,28 @@
 class Solution {
 public:
     int evalRPN(vector<string>& tokens) {
-        stack<int>nums;
-        for(int i=0;i<tokens.size();i++)
+        stack<int>postFix;
+        for(auto it : tokens)
         {
-            if(tokens[i]=="+" || tokens[i]=="-" || tokens[i]=="*" || tokens[i]=="/")
+            if(it == "+" || it == "-" || it == "*" || it == "/")
             {
-                if(nums.size()>1)
-                {
-                    int temp1=nums.top();
-                    nums.pop();
-                    int temp2=nums.top();
-                    nums.pop();
-                    if(tokens[i]=="+") nums.push(temp2+temp1);
-                    else if(tokens[i]=="-") nums.push(temp2-temp1);
-                    else if(tokens[i]=="*") nums.push(temp2*temp1);
-                    else if(tokens[i]=="/") nums.push(temp2/temp1);
-                }
+                int temp1 = postFix.top();
+                postFix.pop();
+                int temp2 = postFix.top();
+                postFix.pop();
+                if(it == "+") postFix.push(temp2 + temp1);
+                else if(it == "-") postFix.push(temp2 - temp1);
+                else if(it == "*") postFix.push(temp2 * temp1);
+                else if(it == "/") postFix.push(temp2 / temp1);
             }
             else
             {
-                int number=0,j=0;
-                if(tokens[i][0]=='-') j++;
-                for(j;j<tokens[i].size();j++)
-                {
-                    number=number*10+(tokens[i][j]-'0');
-                }
-                if(tokens[i][0]=='-') number*=-1;
-                nums.push(number);
+                int num = 0;
+                for(int i = 0 ; i < it.size() ; i++) num = num * 10 + (it[i] - '0');
+                postFix.push(num);
             }
-        }    
-        return nums.top();    
+        }
+        return postFix.top();
+        
     }
 };
