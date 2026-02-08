@@ -23,7 +23,7 @@ public:
             else ans=ans&&true;
         }
         else ans=ans&&true;
-        return leftt+1;
+        return max(leftt,rightt)+1;
     }
     bool isBalanced(TreeNode* root) {
         bool ans=true;
