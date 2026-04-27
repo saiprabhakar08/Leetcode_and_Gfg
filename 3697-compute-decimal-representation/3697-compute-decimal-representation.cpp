@@ -9,7 +9,7 @@ public:
             mul = (mul * 10);
             n /= 10;
         }
-        sort(ans.begin(),ans.end(),greater<int>());
+        reverse(ans.begin(),ans.end());
         return ans;
         
     }
